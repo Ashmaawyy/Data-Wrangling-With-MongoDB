@@ -30,7 +30,7 @@ def add_cities_to_db(db: Database, cities_data: dict):
     except(errors.ServerSelectionTimeoutError):
         print("Oops! insert took too long")
     
-def fetch_first_row(db: Database):
+def fetch_first_element(db: Database):
     """
     A function to print the first element in our data to test that data is inserted correctly
     Arguments: db -> collection object
@@ -61,4 +61,4 @@ def get_db():
 if __name__ == "__main__":
     db = get_db()
     add_cities_to_db(db, get_clean_city_data())
-    fetch_first_row(db)
+    fetch_first_element(db)
