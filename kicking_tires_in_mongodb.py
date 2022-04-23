@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+from pymongo import errors
 import sys
 import pandas as pd
 atlas_creds = pd.read_csv('mongo_atlas_creds.csv')
@@ -11,15 +12,17 @@ def add_city(db):
         db.cities.insert_one({"name" : "Chicago",
                               "long" : "41.8781 N",
                               "lat" : "87.6298 W"})
-
-    except(TimeoutError):
+        print('Inserted data into database successfully :)')
+    
+    except(errors.ServerSelectionTimeoutError):
         print("Oops! insert took too long")
     
 def get_city(db):
     try:
         return db.cities.find_one()
+        print('Query completed successfully :)')
 
-    except(TimeoutError):
+    except(errors.ServerSelectionTimeoutError):
         print("Oops! looks like your query took too long")
 
 def get_db():
