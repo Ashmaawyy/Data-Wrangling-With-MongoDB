@@ -13,7 +13,8 @@ def get_clean_city_data():
     Returns a clean dictionary of city data.
     """
 
-    cities_df = pd.read_csv('cities.csv', low_memory = False)
+    # Reducing dataframe size for performance purposes
+    cities_df = pd.read_csv('cities.csv', low_memory = False, nrows = 10000)
     cities_dict = cities_df.to_dict()
     # Reducing dict size for performance purposes
     cities_dict = dict(list(cities_dict.items())[:10])
