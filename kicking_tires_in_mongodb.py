@@ -28,7 +28,7 @@ def add_cities_to_db(db: Database, cities_data: dict):
         print('Inserted data into database successfully :)')
     
     except(errors.ServerSelectionTimeoutError):
-        print("Oops! insert took too long")
+        print("Oops! insert took too long due to a ServerSelectionTimeoutError")
     
 def fetch_first_element(db: Database):
     """
@@ -37,10 +37,10 @@ def fetch_first_element(db: Database):
     """
 
     try:
-        return db.cities.find_one('$first')
+        return db.cities.find_one({}).sort({'_id': 1}).limit(1)
 
     except(errors.ServerSelectionTimeoutError):
-        print("Oops! looks like your query took too long")
+        print("Oops! looks like your query took too long due to a ServerSelectionTimeoutError")
 
 def get_db():
     """
