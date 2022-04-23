@@ -15,6 +15,10 @@ def get_clean_city_data():
 
     cities_df = pd.read_csv('cities.csv', low_memory = False)
     cities_dict = cities_df.to_dict()
+    # Reducing dict size for performance purposes
+    cities_dict = dict(list(cities_dict.items())[:10])
+    # Making sure all keys and values are strings to avoid InvalidDocument error
+    cities_dict = {str(k): str(v) for k,v in cities_dict.items()}
     return cities_dict
 
 def add_cities_to_db(db: Database, cities_data: dict):
@@ -32,12 +36,12 @@ def add_cities_to_db(db: Database, cities_data: dict):
     
 def fetch_first_record(db: Database):
     """
-    A function to print the first record in our data to test that data is inserted correctly
+    A function to fetch the first record in our data to test that data is inserted correctly
     Arguments: db -> collection object
     """
 
     try:
-        return db.cities.find_one({}).sort({'_id': 1}).limit(1)
+        return db.cities.find_one()
 
     except(errors.ServerSelectionTimeoutError):
         print("Oops! looks like your query took too long due to a ServerSelectionTimeoutError")
@@ -61,4 +65,4 @@ def get_db():
 if __name__ == "__main__":
     db = get_db()
     add_cities_to_db(db, get_clean_city_data())
-    fetch_first_record(db)
+    print(fetch_first_record(db))
