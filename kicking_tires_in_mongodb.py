@@ -13,7 +13,7 @@ def get_clean_city_data():
     Returns a clean dictionary of city data.
     """
 
-    cities_df = pd.read_csv('cities.csv')
+    cities_df = pd.read_csv('cities.csv', low_memory = False)
     cities_dict = cities_df.to_dict()
     return cities_dict
 
@@ -24,7 +24,7 @@ def add_cities_to_db(db: Database, cities_data: dict):
     """
 
     try:
-        db.cities.insert_many(cities_data)
+        db.cities.insert_one(cities_data)
         print('Inserted data into database successfully :)')
     
     except(errors.ServerSelectionTimeoutError):
@@ -32,12 +32,12 @@ def add_cities_to_db(db: Database, cities_data: dict):
     
 def fetch_first_row(db: Database):
     """
-    A function to print the first row in our data to test that data is correct
+    A function to print the first element in our data to test that data is inserted correctly
     Arguments: db -> collection object
     """
 
     try:
-        return db.cities.find_one()
+        return db.cities.find_one('$first')
 
     except(errors.ServerSelectionTimeoutError):
         print("Oops! looks like your query took too long")
@@ -51,7 +51,7 @@ def get_db():
         client = MongoClient("mongodb+srv://Ashmawy:{}@cluster0.ta7o8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority".format(atlas_creds['value'][1]))
         db = client.cities
 
-        print('Connected Ok :)')
+        print('DB created on the cluster successfully :)')
 
     except(errors.ServerSelectionTimeoutError):
         print("Oops! connection timed out")
