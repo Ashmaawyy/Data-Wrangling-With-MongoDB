@@ -4,6 +4,7 @@ from pymongo import MongoClient
 from pymongo import errors
 import sys
 import pandas as pd
+import pprint
 
 atlas_creds = pd.read_csv('mongo_atlas_creds.csv')
 
@@ -66,4 +67,4 @@ def get_db():
 if __name__ == "__main__":
     db = get_db()
     add_cities_to_db(db, get_clean_city_data())
-    print(fetch_first_record(db))
+    pprint.pprint(fetch_first_record(db))
