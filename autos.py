@@ -1,3 +1,5 @@
+import csv
+
 def process_file(input_file, output_good, output_bad):
     # store data into lists for output
     data_good = []
