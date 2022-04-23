@@ -2,9 +2,9 @@ from gridfs import Database
 from matplotlib.collections import Collection
 from pymongo import MongoClient
 from pymongo import errors
-import sys
 import pandas as pd
 import pprint
+import csv
 
 atlas_creds = pd.read_csv('mongo_atlas_creds.csv')
 
@@ -15,12 +15,12 @@ def get_clean_city_data():
     """
 
     # Reducing dataframe size for performance purposes
-    cities_df = pd.read_csv('cities.csv', low_memory = False, nrows = 10000)
-    cities_dict = cities_df.to_dict()
+    with open('cities.csv', "r") as f:
+        cities_dict = csv.DictReader(f)
     # Reducing dict size for performance purposes
-    cities_dict = dict(list(cities_dict.items())[:10])
+        cities_dict = dict(list(cities_dict.items())[:10])
     # Making sure all keys and values are strings to avoid InvalidDocument error
-    cities_dict = {str(k): str(v) for k,v in cities_dict.items()}
+        cities_dict = {str(k): str(v) for k,v in cities_dict.items()}
     return cities_dict
 
 def add_cities_to_db(db: Database, cities_data: dict):
