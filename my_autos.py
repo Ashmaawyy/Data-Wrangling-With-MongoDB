@@ -10,10 +10,9 @@ atlas_creds = pd.read_csv('mongo_atlas_creds.csv')
 def get_clean_autos_data():
     """
     A function to clean autos data :)
-    Returns a clean dictionary of city data.
+    Returns a clean dictionary of autos data.
     """
 
-    # Reducing dataframe size for performance purposes
     autos_df = pd.read_csv('autos.csv', low_memory = False)
     autos_dict = autos_df.to_dict(orient = 'series')
 
