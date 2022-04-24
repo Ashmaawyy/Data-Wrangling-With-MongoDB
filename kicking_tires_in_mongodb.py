@@ -56,7 +56,7 @@ def get_db():
         client = MongoClient("mongodb+srv://Ashmawy:{}@cluster0.ta7o8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority".format(atlas_creds['value'][1]))
         db = client.cities
 
-        print('DB created on the cluster successfully :)')
+        print('DB server accessed with no problems :)')
 
     except(errors.ServerSelectionTimeoutError):
         print("Oops! connection timed out")
@@ -65,5 +65,8 @@ def get_db():
 
 if __name__ == "__main__":
     db = get_db()
-    add_cities_to_db(db, get_clean_city_data())
-    pprint.pprint(fetch_first_record(db))
+    
+    # Only call this function once
+    #add_cities_to_db(db, get_clean_city_data())
+
+    pprint.pprint(len(fetch_first_record(db)))
