@@ -21,7 +21,6 @@ def get_clean_city_data():
         and setting low_memory = False reduces memory further """
 
     cities_dict = {str(k): str(v) for k,v in cities_dict.items()}
-    cities_dict = dict(list(cities_dict.items()))
     return cities_dict
 
 def add_cities_to_db(db: Database, cities_data: dict):
