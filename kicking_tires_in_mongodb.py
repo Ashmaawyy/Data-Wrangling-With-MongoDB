@@ -17,9 +17,9 @@ def get_clean_city_data():
     cities_df = pd.read_csv('cities.csv', low_memory = False)
     cities_dict = cities_df.to_dict(orient = 'series')
 
-    """ **Note**:
-    Series orientation when dealing with MongoDB uses least memory,
-    and setting low_memory = False reduces memory further """
+    """ Note:
+        Series orientation when dealing with MongoDB uses least memory,
+        and setting low_memory = False reduces memory further """
 
     cities_dict = {str(k): str(v) for k,v in cities_dict.items()}
     cities_dict = dict(list(cities_dict.items()))
