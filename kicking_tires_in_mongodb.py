@@ -14,10 +14,15 @@ def get_clean_city_data():
     """
 
     # Reducing dataframe size for performance purposes
-    cities_df = pd.read_csv('cities.csv', low_memory = False, nrows = 10000)
-    cities_dict = cities_df.to_dict(orient = 'list')
-    # Reducing dict size for performance purposes
-    cities_dict = dict(list(cities_dict.items())[:10])
+    cities_df = pd.read_csv('cities.csv', low_memory = False)
+    cities_dict = cities_df.to_dict(orient = 'series')
+
+    """ **Note**:
+    Series orientation when dealing with MongoDB uses least memory,
+    and setting low_memory = False reduces memory further """
+
+    cities_dict = {str(k): str(v) for k,v in cities_dict.items()}
+    cities_dict = dict(list(cities_dict.items()))
     return cities_dict
 
 def add_cities_to_db(db: Database, cities_data: dict):
@@ -40,7 +45,7 @@ def fetch_first_record(db: Database):
     """
 
     try:
-        return db.cities.find_one({}, {'rdf-schema#label': 1, 'administrativeDistrict_label': 1})
+        return db.cities.find_one({}, {'rdf-schema#label': 1})
 
     except(errors.ServerSelectionTimeoutError):
         print("Oops! looks like your query took too long due to a ServerSelectionTimeoutError")
