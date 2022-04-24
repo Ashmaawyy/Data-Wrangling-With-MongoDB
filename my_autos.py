@@ -19,7 +19,6 @@ def get_clean_autos_data():
         and setting low_memory = False reduces memory further """
 
     autos_dict = {str(k): str(v) for k,v in autos_dict.items()}
-    autos_dict = dict(list(autos_dict.items()))
     return autos_dict
 
 def add_autos_to_db(db: Database, autos_data: dict):
