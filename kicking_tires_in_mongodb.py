@@ -38,14 +38,14 @@ def add_cities_to_db(db: Database, cities_data: dict):
     except(errors.ServerSelectionTimeoutError):
         print("Oops! insert took too long due to a ServerSelectionTimeoutError")
     
-def fetch_first_record(db: Database):
+def fetch_key(db: Database, key_to_be_fetched: str):
     """
     A function to fetch the first record in our data to test that data is inserted correctly
     Arguments: db -> collection object
     """
 
     try:
-        return db.cities.find_one({}, {'rdf-schema#label': 1})
+        return db.cities.find_one({}, {key_to_be_fetched: 1})
 
     except(errors.ServerSelectionTimeoutError):
         print("Oops! looks like your query took too long due to a ServerSelectionTimeoutError")
@@ -72,4 +72,4 @@ if __name__ == "__main__":
     # Only call this function once
     #add_cities_to_db(db, get_clean_city_data())
 
-    pprint.pprint(fetch_first_record(db))
+    pprint.pprint(fetch_key(db, 'rdf-schema#label'))
