@@ -70,6 +70,6 @@ if __name__ == "__main__":
     db = get_db()
     
     # Only call this function once
-    add_autos_to_db(db, get_clean_autos_data())
+    #add_autos_to_db(db, get_clean_autos_data())
 
     pprint.pprint(fetch_key(db, 'rdf-schema#label'))
