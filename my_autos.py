@@ -8,10 +8,8 @@ import pprint
 atlas_creds = pd.read_csv('mongo_atlas_creds.csv')
 
 def get_clean_autos_data():
-    """
-    A function to clean autos data :)
-    Returns a clean dictionary of autos data.
-    """
+    """ A function to clean autos data :)
+    Returns a clean dictionary of autos data. """
 
     autos_df = pd.read_csv('autos.csv', low_memory = False)
     autos_dict = autos_df.to_dict(orient = 'series')
@@ -25,10 +23,8 @@ def get_clean_autos_data():
     return autos_dict
 
 def add_autos_to_db(db: Database, autos_data: dict):
-    """
-    A function to insert city data into db
-    Arguments: db -> collection object, cities_data -> dictionary
-    """
+    """ A function to insert autos data into db
+    Arguments: db -> collection object, autos_data -> dictionary """
 
     try:
         db.autos.insert_one(autos_data)
@@ -38,10 +34,8 @@ def add_autos_to_db(db: Database, autos_data: dict):
         print("Oops! insert took too long due to a ServerSelectionTimeoutError")
     
 def fetch_key(db: Database, key_to_be_fetched: str):
-    """
-    A function to fetch the first record in our data to test that data is inserted correctly
-    Arguments: db -> collection object
-    """
+    """ A function to fetch the first record in our data to test that data is inserted correctly
+    Arguments: db -> collection object """
 
     try:
         return db.autos.find_one({}, {key_to_be_fetched: 1})
@@ -50,9 +44,7 @@ def fetch_key(db: Database, key_to_be_fetched: str):
         print("Oops! looks like your query took too long due to a ServerSelectionTimeoutError")
 
 def get_db():
-    """
-    A function to create the database on a MongoDB cluster
-    """
+    """ A function to create the database on a MongoDB cluster """
     
     try:
         client = MongoClient("mongodb+srv://Ashmawy:{}@cluster0.ta7o8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority".format(atlas_creds['value'][1]))
