@@ -70,6 +70,6 @@ if __name__ == "__main__":
     db = get_db()
     
     # Only call this function once
-    add_cities_to_db(db, get_clean_city_data())
+    #add_cities_to_db(db, get_clean_city_data())
 
     pprint.pprint(fetch_first_record(db))
