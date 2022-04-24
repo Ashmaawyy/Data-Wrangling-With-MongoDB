@@ -57,7 +57,7 @@ def get_db():
     
     try:
         client = MongoClient("mongodb+srv://Ashmawy:{}@cluster0.ta7o8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority".format(atlas_creds['value'][1]))
-        db = client.cities
+        db = client.playing_with_pymongo
 
         print('DB server accessed with no problems :)')
 
