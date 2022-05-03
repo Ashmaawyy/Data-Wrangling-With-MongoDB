@@ -11,5 +11,5 @@ for event, elem in ET.iterparse(file_name, events = ('start',)):
     giza_osm_dict[elem.tag].append(elem.attrib)
     print('adding attribute: ', elem.attrib, ' to key: ', elem.tag)
 
-pprint.pprint(giza_osm_dict)
-print('Lengh of the generated dict is: ', len(giza_osm_dict))
+print('Number of nodes found: ', len(giza_osm_dict['node']), '\n',
+'Number of members found: ', len(giza_osm_dict['member']))
