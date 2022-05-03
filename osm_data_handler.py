@@ -8,8 +8,10 @@ values = []
 giza_osm_dict = collections.defaultdict(list)
 
 for event, elem in ET.iterparse(file_name, events = ('start',)):
-    giza_osm_dict[elem.tag].append(str(elem.attrib))
+    giza_osm_dict[elem.tag].append(elem.attrib)
 
-print('Number of nodes found: ', len(giza_osm_dict['node']), '\n',
-'Number of members found: ', len(giza_osm_dict['member']), '\n',
-'Number of tags found: ', len(giza_osm_dict['tag']))
+print(
+    'Number of nodes found: ', len(giza_osm_dict['node']), '\n',
+    'Number of members found: ', len(giza_osm_dict['member']), '\n',
+    'Number of tags found: ', len(giza_osm_dict['tag']), '\n',
+    'Number of ways found: ', len(giza_osm_dict['way']))
