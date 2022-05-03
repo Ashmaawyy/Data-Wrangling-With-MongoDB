@@ -12,4 +12,5 @@ for event, elem in ET.iterparse(file_name, events = ('start',)):
     print('adding attribute: ', elem.attrib, ' to key: ', elem.tag)
 
 print('Number of nodes found: ', len(giza_osm_dict['node']), '\n',
-'Number of members found: ', len(giza_osm_dict['member']))
+'Number of members found: ', len(giza_osm_dict['member']), '\n',
+'Number of tags found: ', len(giza_osm_dict['tags']))
