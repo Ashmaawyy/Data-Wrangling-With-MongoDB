@@ -7,7 +7,7 @@ file_name = 'giza_osm_data.xml'
 street_type_re = re.compile(r'\b\S+\.?$', re.IGNORECASE)
 giza_osm_dict = collections.defaultdict(list)
 street_types = collections.defaultdict(set)
-expected = ['Street', 'Avenue', 'Boulevard', 'Drive', 'Court', 'Place']
+expected = ['Street', 'Avenue', 'Boulevard', 'Drive']
 
 def build_dict():
     for index, (event, elem) in enumerate(ET.iterparse(file_name)):
