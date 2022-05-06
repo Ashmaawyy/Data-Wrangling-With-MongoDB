@@ -16,6 +16,5 @@ print(
     'Number of nodes found: ', len(giza_osm_dict['node']), '\n',
     'Number of members found: ', len(giza_osm_dict['member']), '\n',
     'Number of relations found: ', len(giza_osm_dict['relation']), '\n',
-    'Number of tags found: ', len(giza_osm_dict['tag']), '\n',
     'Number of ways found: ', len(giza_osm_dict['way']),
     '\n')
