@@ -6,17 +6,14 @@ file_name = 'giza_osm_data.xml'
 giza_osm_dict = collections.defaultdict(list)
 
 for index, (event, elem) in enumerate(ET.iterparse(file_name)):
-    giza_osm_dict[elem.tag].append(elem.attrib)
+    if elem.tag != 'tag':
+        giza_osm_dict[elem.tag].append(elem.attrib)
+    else:
+        giza_osm_dict['node'][-1].update(elem.attrib)
+        giza_osm_dict['way'][-1].update(elem.attrib)
+        giza_osm_dict['member'][-1].update(elem.attrib)
 
-    if elem.tag == 'tag':
-        try:
-            giza_osm_dict['node'][index].update(elem.attrib)
-
-        except(IndexError):
-            continue
-
-    
-pprint.pprint(giza_osm_dict['node'][:10])
+pprint.pprint(giza_osm_dict['node'][150:200])
 print(
     '\n',
     'Number of nodes found: ', len(giza_osm_dict['node']), '\n',
