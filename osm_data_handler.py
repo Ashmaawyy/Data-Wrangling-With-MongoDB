@@ -13,7 +13,7 @@ for index, (event, elem) in enumerate(ET.iterparse(file_name)):
         giza_osm_dict['way'][-1].update(elem.attrib)
         giza_osm_dict['relation'][-1].update(elem.attrib)
 
-pprint.pprint(giza_osm_dict['member'])
+pprint.pprint(giza_osm_dict['relation'])
 print(
     '\n',
     'Number of nodes found: ', len(giza_osm_dict['node']), '\n',
