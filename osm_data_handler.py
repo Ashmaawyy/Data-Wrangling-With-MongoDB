@@ -7,7 +7,6 @@ file_name = 'giza_osm_data.xml'
 street_type_re = re.compile(r'\b\S+\.?$', re.IGNORECASE)
 giza_osm_dict = collections.defaultdict(list)
 street_types = collections.defaultdict(set)
-expected = ['Street', 'Avenue', 'Boulevard', 'Drive']
 
 def build_dict():
     for event, elem in ET.iterparse(file_name, events = ('start',)):
@@ -26,8 +25,7 @@ def audit_street_type(street_types, street_name):
     match = street_type_re.search(street_name)
     if match:
         street_type = match.group()
-        if street_type not in expected:
-            street_types[street_type].add(street_name)
+        street_types[street_type].add(street_name)
 
 def is_street_name(elem):
     return (elem.attrib['k'] == 'addr:street')
