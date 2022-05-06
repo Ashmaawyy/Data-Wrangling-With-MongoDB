@@ -10,13 +10,9 @@ street_types = collections.defaultdict(set)
 expected = ['Street', 'Avenue', 'Boulevard', 'Drive']
 
 def build_dict():
-    for index, (event, elem) in enumerate(ET.iterparse(file_name)):
-        if elem.tag != 'tag' or 'nd':
-            giza_osm_dict[elem.tag].append(elem.attrib)
-        else:
-            giza_osm_dict['node'][-1].update(elem.attrib)
-            giza_osm_dict['way'][-1].update(elem.attrib)
-            giza_osm_dict['relation'][-1].update(elem.attrib)
+    for event, elem in ET.iterparse(file_name, events = ('start',)):
+        giza_osm_dict[elem.tag].append(elem.attrib)
+
     return giza_osm_dict
     print(
         '\n',
