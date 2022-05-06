@@ -6,7 +6,7 @@ import re
 file_name = 'giza_osm_data.xml'
 street_type_re = re.compile(r'\b\S+\.?$', re.IGNORECASE)
 giza_osm_dict = collections.defaultdict(list)
-streets = collections.defaultdict(set)
+streets, nodes, relations = collections.defaultdict(set)
 
 def build_main_dict():
     for event, elem in ET.iterparse(file_name, events = ('start',)):
