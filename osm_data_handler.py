@@ -8,7 +8,7 @@ street_type_re = re.compile(r'\b\S+\.?$', re.IGNORECASE)
 giza_osm_dict = collections.defaultdict(list)
 street_types = collections.defaultdict(set)
 
-def build_dict():
+def build_main_dict():
     for event, elem in ET.iterparse(file_name, events = ('start',)):
         giza_osm_dict[elem.tag].append(elem.attrib)
 
