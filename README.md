@@ -1,2 +1,2 @@
 # Data-Wrangling-With-MongoDB
-### My 'Hello World' MongoDB Repo : )
+### My 'Hello World' MongoDB Project : )
